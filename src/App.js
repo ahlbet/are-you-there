@@ -10,36 +10,13 @@ class App extends Component {
     super(props);
     this.state = {
       isShowingView1: true,
-      isShowingModal: false
     };
   }
 
-  componentDidMount() {
-    setTimeout(this.showModal, 10000);
-  }
-
-  showModal = () => {
-    this.setState({
-      isShowingModal: true
-    });
-    setTimeout(this.showView2, 5000);
-  }
-
-  resetView1 = () => {
-    this.setState({
-      isShowingModal: false,
-      isShowingView1: true
-    });
-    setTimeout(this.showModal, 10000);
-  }
-
-  showView2 = () => {
-    if (this.state.isShowingModal) {
-      this.setState({
-        isShowingView1: false,
-        isShowingModal: false
-      });
-    }
+  switchViews = () => {
+    this.setState((prevState) => ({
+      isShowingView1: !prevState.isShowingView1
+    }));
   }
 
   render() {
@@ -48,9 +25,9 @@ class App extends Component {
         <Nav />
         {
           this.state.isShowingView1 ?
-            <View1 isShowingModal={this.state.isShowingModal} resetView1={this.resetView1} />
+            <View1 switchViews={this.switchViews} />
             :
-            <View2 resetView1={this.resetView1} />
+            <View2 switchViews={this.switchViews} />
         }
       </div>
     );

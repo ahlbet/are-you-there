@@ -4,7 +4,7 @@ import Button from './Button';
 const View2 = (props) => {
   return (
     <div className="view2">
-      <Button handleClick={props.resetView1} label={'Try Again!'} />
+      <Button handleClick={props.switchViews} label={'Try Again!'} />
     </div>
   );
 };
